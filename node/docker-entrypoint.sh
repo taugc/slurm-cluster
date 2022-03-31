@@ -7,7 +7,8 @@ m=$(grep MemTotal /proc/meminfo | sed -E 's/(.*) (.*) (.*)/\2/')
 mem=$(printf "$(($m / 1024))")
 sudo sed -i "s/RAM/$mem/g" /etc/slurm-llnl/slurm.conf
 
-sudo service munge start
+sudo systemctl start munge
+sudo systemctl start ssh 
 sudo slurmd -N $SLURM_NODENAME
 
 tail -f /dev/null
