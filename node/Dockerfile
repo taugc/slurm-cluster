@@ -4,7 +4,8 @@ RUN apt update -y && \
     apt install -y systemctl && apt install -y nano && \
     apt install -y openssh-server && apt install -y munge && \
     apt install -y vim && apt install -y build-essential && \ 
-    apt install -y git && apt install -y mariadb-server && apt install -y wget
+    apt install -y git && apt install -y mariadb-server && apt install -y wget && \
+    apt install -y iputils-ping
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt install slurmd slurm-client -y
