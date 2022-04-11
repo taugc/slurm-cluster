@@ -11,9 +11,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt install slurmd slurm-client -y
 RUN apt install sudo -y && apt install python3.9 python3-pip -y
 
-RUN useradd -m admin -s /usr/bin/bash -d /home/admin &&  \
-    echo "admin:admin" | chpasswd && adduser admin sudo && \
-    echo "admin     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd -m slurm -s /usr/bin/bash -d /home/slurm &&  \
+    echo "slurm:slurm" | chpasswd && adduser slurm sudo && \
+    echo "slurm     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 COPY slurm.conf /etc/slurm-llnl/
 COPY cgroup.conf /etc/slurm-llnl/
