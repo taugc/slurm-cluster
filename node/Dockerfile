@@ -7,13 +7,13 @@ RUN apt update -y && \
     apt install -y git && apt install -y mariadb-server && apt install -y wget && \
     apt install -y iputils-ping
 
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt install slurmd slurm-client -y
-RUN apt install sudo -y && apt install python3.9 python3-pip -y
-
 RUN useradd -m slurm -s /usr/bin/bash -d /home/slurm &&  \
     echo "slurm:slurm" | chpasswd && adduser slurm sudo && \
     echo "slurm     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt install slurmd slurm-client -y
+RUN apt install sudo -y && apt install python3.9 python3-pip -y
 
 COPY slurm.conf /etc/slurm-llnl/
 COPY cgroup.conf /etc/slurm-llnl/
