@@ -2,6 +2,7 @@ FROM ubuntu:20.04
 
 ENV TZ=America/Sao_Paulo
 ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt update -y && \ 
     apt install -y tzdata && \
     apt install -y sudo && \
@@ -17,8 +18,8 @@ RUN useradd -m slurm -s /usr/bin/bash -d /home/slurm && \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt install -y slurm-wlm slurmd slurm-client slurmctld
-RUN apt install -y python3.9 python3-pip 
+RUN apt install -y slurmd slurm-client slurmctld
+RUN apt install -y sudo python3.9 python3-pip 
 
 RUN apt install -y libopenmpi-dev
 RUN pip3 install mpi4py

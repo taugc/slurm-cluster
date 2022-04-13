@@ -2,7 +2,8 @@ FROM ubuntu:20.04
 
 ENV TZ=America/Sao_Paulo
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt update -y && \
+
+RUN apt update -y && \ 
     apt install -y tzdata && \
     apt install -y sudo && \
     apt install -y nano && \
@@ -17,9 +18,8 @@ RUN useradd -m slurm -s /usr/bin/bash -d /home/slurm && \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt install -y slurm-wlm slurmd slurm-client
-RUN apt install -y python3.9 python3-pip 
-
+RUN apt install slurmd slurm-client -y
+RUN apt install sudo -y && apt install python3.9 python3-pip -y
 
 COPY slurm.conf /etc/slurm-llnl/
 COPY cgroup.conf /etc/slurm-llnl/
