@@ -1,15 +1,20 @@
 FROM ubuntu:20.04
 
+ENV TZ=America/Sao_Paulo
 ARG DEBIAN_FRONTEND=noninteractive
+ARG UID=1044
+ARG GID=1044
+
 RUN apt update -y && \ 
+    apt install -y tzdata && \
     apt install -y sudo && \
     apt install -y nano && \
     apt install -y openssh-server && apt install -y munge && \
     apt install -y vim && apt install -y build-essential && \ 
     apt install -y git && apt install -y mariadb-server && apt install -y wget && \
     apt install -y systemctl && apt install -y iputils-ping
-
-RUN useradd -m slurm -s /usr/bin/bash -d /home/slurm && \
+RUN groupadd -g $GID -o slurm 
+RUN useradd -m -u $UID -g $GID -s /usr/bin/bash -d /home/slurm slurm && \
     echo "slurm:slurm" | chpasswd && adduser slurm sudo && \
     echo "slurm     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers 
 
