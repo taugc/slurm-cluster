@@ -4,10 +4,12 @@ ENV TZ=America/Sao_Paulo
 ARG DEBIAN_FRONTEND=noninteractive
 ARG UID=1044
 ARG GID=1044
+
 RUN apt update -y && \ 
     apt install -y tzdata && \
     apt install -y sudo && \
     apt install -y nano && \
+    apt install -y curl && \
     apt install -y openssh-server && apt install -y munge && \
     apt install -y vim && apt install -y build-essential && \ 
     apt install -y git && apt install -y mariadb-server && apt install -y wget && \
