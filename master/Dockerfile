@@ -22,6 +22,8 @@ RUN useradd -m -u $UID -g $GID -s /usr/bin/bash -d /home/slurm slurm && \
     echo "slurm:slurm" | chpasswd && adduser slurm sudo && \
     echo "slurm     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers 
 
+RUN usermod -aG wgs slurm
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt install -y slurmd slurm-client slurmctld
