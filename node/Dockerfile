@@ -4,6 +4,7 @@ ENV TZ=America/Sao_Paulo
 ARG DEBIAN_FRONTEND=noninteractive
 ARG UID=1044
 ARG GID=1044
+ARG WGSGID=1050
 
 RUN apt update -y && \ 
     apt install -y tzdata && \
@@ -15,6 +16,7 @@ RUN apt update -y && \
     apt install -y git && apt install -y mariadb-server && apt install -y wget && \
     apt install -y systemctl && apt install -y iputils-ping
 
+RUN groupadd -g $WGSGID -o wgs
 RUN groupadd -g $GID -o slurm 
 RUN useradd -m -u $UID -g $GID -s /usr/bin/bash -d /home/slurm slurm && \
     echo "slurm:slurm" | chpasswd && adduser slurm sudo && \
